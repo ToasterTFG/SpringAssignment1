@@ -27,3 +27,20 @@ public class courseServices {
         arrays.add(newArray);
         return newArray;
     }
+
+ // READ ALL - Get all arrays
+    @GetMapping
+    public List<foundation> getAllArrays() {
+        return arrays;
+    }
+
+    // READ ONE - Get array by name
+    @GetMapping("/{name}")
+    public ResponseEntity<foundation> getArrayByName(@PathVariable String name) {
+        Optional<foundation> foundArray = arrays.stream()
+                .filter(array -> array.getName().equalsIgnoreCase(name))
+                .findFirst();
+
+        return foundArray.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
