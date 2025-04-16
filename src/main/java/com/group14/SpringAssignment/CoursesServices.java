@@ -20,3 +20,10 @@ public class courseServices {
         arrays.add(new foundation("Undergraduate", new String[]{"Software engineering", "Data Science", "Computer programming", "Database Developer"}));
         arrays.add(new foundation("Honours", new String[]{"Data analyst", "Artificial intelligence", "Machine learning", "Web Developer", "Data Science"}));
     }
+    
+    // CREATE - Add new array
+    @PostMapping
+    public foundation createArray(@RequestBody foundation newArray) {
+        arrays.add(newArray);
+        return newArray;
+    }
