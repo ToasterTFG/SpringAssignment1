@@ -44,3 +44,18 @@ public class courseServices {
         return foundArray.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+// UPDATE - Modify an existing array
+    @PutMapping("/{name}")
+    public ResponseEntity<foundation> updateArray(
+            @PathVariable String name,
+            @RequestBody String[] newItems) {
+
+        for (foundation array : arrays) {
+            if (array.getName().equalsIgnoreCase(name)) {
+                array.setItems(newItems);
+                return ResponseEntity.ok(array);
+            }
+        }
+        return ResponseEntity.notFound().build();
+    }
