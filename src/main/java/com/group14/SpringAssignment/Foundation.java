@@ -1,4 +1,10 @@
-package com.group14.SpringAssignment;
+package com.group14.springassigment;
 
 
-public class Foundation {}
+
+import org.springframework.web.bind.annotation.*;
+
+
+public class foundation {
+    private String name;
+    private String[] items;
