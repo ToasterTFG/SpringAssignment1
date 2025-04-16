@@ -59,3 +59,30 @@ public class courseServices {
         }
         return ResponseEntity.notFound().build();
     }
+
+    // DELETE - Remove an array
+    @DeleteMapping("/{name}")
+    public ResponseEntity<Void> deleteArray(@PathVariable String name) {
+        boolean removed = arrays.removeIf(array -> array.getName().equalsIgnoreCase(name));
+        return removed ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    }
+
+    // SPECIAL OPERATION: Add item to existing array
+    @PatchMapping("/{name}/add")
+    public ResponseEntity<foundation> addItemToArray(
+            @PathVariable String name,
+            @RequestParam String item) {
+
+        for (foundation array : arrays) {
+            if (array.getName().equalsIgnoreCase(name)) {
+                String[] currentItems = array.getItems();
+                String[] newItems = new String[currentItems.length + 1];
+                System.arraycopy(currentItems, 0, newItems, 0, currentItems.length);
+                newItems[newItems.length - 1] = item;
+                array.setItems(newItems);
+                return ResponseEntity.ok(array);
+            }
+        }
+        return ResponseEntity.notFound().build();
+    }
+}
