@@ -1,21 +1,20 @@
-package com.group14.springassigment;
+package com.group14.SpringAssignment;
 
 
 
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import org.springframework.web.bind.annotation.*;
 
 
 public class foundation {
+    @NotBlank(message = "Course name is required")
+    @Pattern(regexp = "foundation|undergraduate|honors", message = "Course type must be foundation, undergraduate, or honors")
     private String name;
-    private String[] items;
-package com.group14.springassigment;
-
-//import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-
-public class foundation {
-    private String name;
+    @NotBlank(message = "Module name is required")
+    @Size(min = 3, max = 100, message = "Module name must be between 3 and 100 characters")
     private String[] items;
 
     // Constructors
